@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Platzigram</string>
+    <string name="title_activity_referencia">ReferenciaActivity</string>
+    <string name="hint_username">Nombre de usuarios</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="text_button_login">Iniciar sesion</string>
+    <string name="dont_have_account">¿ No tienes cuenta ? ,</string>
+    <string name="create_here">Crear aqui</string>
+    <string name="hint_email">Correo electronico</string>
+    <string name="hint_user">Usuario</string>
+    <string name="hint_name">Nombre</string>
+    <string name="hint_password_create">Contraseña</string>
+    <string name="hint_confirm_password_Create">Confirmar contraseña</string>
+    <string name="text_button_Createaccount">Unete</string>
+    <string name="toolbar_tittle_createaccount">Create cuenta</string>
+    <string name="username_card">Franklin Vasquez</string>
+    <string name="firstword_card">Hace</string>
+    <string name="timecard_card">4 dias</string>
+    <string name="likenumbercard_card">10 Me Gusta</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_search">Buscar</string>
+    <string name="tab_home">Home</string>
+    <string name="tab_profile">YO</string>
+    <string name="profile_fragment">Profile</string>
+    <string name="search_fragment">search</string>
+    <string name="secondword_detail">Me Gusta</string>
+    <string name="titleimagedetail">\"todos copas en la playa\"</string>
+    <string name="lorem">El Lorem Ipsum fue concebido como un texto de relleno, formateado de una cierta manera para permitir la presentación de elementos gráficos en documentos, sin necesidad de una copia formal. El uso de Lorem Ipsum permite a los diseñadores reunir los diseños y la forma del contenido antes de que el contenido se haya creado, dando al diseño y al proceso de produccióEl Lorem Ipsum fue concebido como un texto de relleno, formateado de una cierta manera para permitir la presentación de elementos gráficos en documentos, sin necesidad de una copia formal. El uso de Lorem Ipsum permite a los diseñadores reunir los diseños y la forma del contenido antes de que el contenido se haya creado, dando al diseño y al proceso de producción más libertad.n más libertad.</string>
+    <string name="transitionname_picture">transitionnamepicture</string>
+</resources>
