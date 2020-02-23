@@ -5,5 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
-
+    <TextView
+        android:id="@+id/textoEjemplo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/username_card"
+        tools:ignore="MissingConstraints"
+        android:gravity="center"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

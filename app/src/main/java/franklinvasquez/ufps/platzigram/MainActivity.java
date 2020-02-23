@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ContainerActivity.class);
         startActivity(intent);
     }
+    public void goEjemplo(View view){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
     public void imagenLink(View view){
         Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse("http://www.platzi.com"));
         startActivity(viewIntent);

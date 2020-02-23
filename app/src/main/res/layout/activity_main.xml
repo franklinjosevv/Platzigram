@@ -89,7 +89,8 @@
                         android:text="@string/dont_have_account"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
-                        android:textSize="@dimen/textsize_donthaveaccount"/>
+                        android:textSize="@dimen/textsize_donthaveaccount"
+                        android:onClick="goEjemplo"/>
 
                     <TextView
                         android:id="@+id/createHere"
