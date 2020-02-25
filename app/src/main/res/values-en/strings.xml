@@ -27,7 +27,14 @@
     <string name="tab_profile">YO</string>
     <string name="profile_fragment">Profile</string>
     <string name="search_fragment">search</string>
+    <string name="secondword_detail">Me Gusta</string>
     <string name="titleimagedetail">\"todos copas en la playa\"</string>
     <string name="lorem">El Lorem Ipsum fue concebido como un texto de relleno, formateado de una cierta manera para permitir la presentación de elementos gráficos en documentos, sin necesidad de una copia formal. El uso de Lorem Ipsum permite a los diseñadores reunir los diseños y la forma del contenido antes de que el contenido se haya creado, dando al diseño y al proceso de produccióEl Lorem Ipsum fue concebido como un texto de relleno, formateado de una cierta manera para permitir la presentación de elementos gráficos en documentos, sin necesidad de una copia formal. El uso de Lorem Ipsum permite a los diseñadores reunir los diseños y la forma del contenido antes de que el contenido se haya creado, dando al diseño y al proceso de producción más libertad.n más libertad.</string>
     <string name="transitionname_picture">transitionnamepicture</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="button1">Start</string>
+    <string name="button2">Destroy</string>
+    <string name="button3">Alarma</string>
 </resources>

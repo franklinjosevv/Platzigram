@@ -90,7 +90,7 @@
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:textSize="@dimen/textsize_donthaveaccount"
-                        android:onClick="goPost"/>
+                        android:onClick="goVolley"/>
 
                     <TextView
                         android:id="@+id/createHere"
@@ -104,6 +104,30 @@
                         android:onClick="goCreateAccount"/>
 
                 </RelativeLayout>
+
+                <Button
+                    android:id="@+id/start"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button1"
+                    android:theme="@style/RaisedButtonDark"
+                    android:onClick="startService"/>
+
+                <Button
+                    android:id="@+id/destroy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button2"
+                    android:theme="@style/RaisedButtonDark"
+                    android:onClick="destroyService"/>
+
+                <Button
+                    android:id="@+id/buttom_alarma"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button3"
+                    android:theme="@style/RaisedButtonDark"/>
+
             </LinearLayout>
 
 

@@ -3,6 +3,7 @@
     package="franklinvasquez.ufps.platzigram">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PostManActivity"></activity>
+        <receiver
+            android:name=".AlarmRecvr"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="franklinvasquez.ufps.platzigram.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+
+        </receiver>
+
+        <service
+            android:name=".MyService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".VolleyActivity" />
+        <activity android:name=".PostManActivity" />
         <activity
             android:name=".viem.PictureDetalActivity"
             android:parentActivityName=".viem.ContainerActivity">
