@@ -3,7 +3,7 @@
     package="franklinvasquez.ufps.platzigram">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -12,14 +12,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".EditorActivity"
+            android:theme="@style/EditorTheme"
+            android:launchMode="singleTask">
+
+        </activity>
+        <activity android:name=".Main2Activity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.LAUNCHER"/>
+        </intent-filter>
+        </activity>
+
         <receiver
             android:name=".AlarmRecvr"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="franklinvasquez.ufps.platzigram.action.BOOT_COMPLETED"></action>
+                <action android:name="franklinvasquez.ufps.platzigram.action.BOOT_COMPLETED" />
             </intent-filter>
-
         </receiver>
 
         <service

@@ -92,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(viewIntent);
     }
 
+    public void retrofit2MysqlPhp(View view){
+        Intent intent = new Intent(this, Main2Activity.class);
+        startActivity(intent);
+    }
+
     public void startService(View view){
         startService(new Intent(getBaseContext(), MyService.class));
     }

@@ -127,6 +127,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/button3"
                     android:theme="@style/RaisedButtonDark"/>
+                <Button
+                    android:id="@+id/retrofit2PhpMysql"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="retrofit2PhpMysql"
+                    android:theme="@style/RaisedButtonDark"
+                    android:onClick="retrofit2MysqlPhp"/>
 
             </LinearLayout>
 
