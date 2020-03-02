@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,7 +34,10 @@ public class EditorActivity extends AppCompatActivity implements EditorView {
     Button button;
     SpectrumPalette palette;
     EditorPresenter presenter;
-    int colores;
+    int color,id;
+    String title, note;
+
+    Menu actionMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +53,21 @@ public class EditorActivity extends AppCompatActivity implements EditorView {
         txt_note = (EditText) findViewById(R.id.note) ;
         palette = (SpectrumPalette) findViewById(R.id.palette);
 
-        palette.setOnColorSelectedListener(clr -> colores = clr);
+        palette.setOnColorSelectedListener(clr -> color = clr);
 
         palette.setSelectedColor(getResources().getColor(R.color.white));
-        colores = getResources().getColor(R.color.white);
+        color = getResources().getColor(R.color.white);
 
 
         presenter = new EditorPresenter(this);
+
+        Intent intent = getIntent();
+        id = intent.getIntExtra("id", 0);
+        title = intent.getStringExtra("title");
+        note = intent.getStringExtra("note");
+        color = intent.getIntExtra("color", 0);
+
+        setDataFromIntentExtra();
 
         button = (Button) findViewById(R.id.save_retrofit);
 
@@ -63,14 +76,14 @@ public class EditorActivity extends AppCompatActivity implements EditorView {
             public void onClick(View view) {
                 String title = txt_title.getText().toString().trim();
                 String note = txt_note.getText().toString().trim();
-                int color = colores;
+                int colores = color;
 
                 if(title.isEmpty()){
                     txt_title.setError("Please enter a title");
                 }else if(note.isEmpty()){
                     txt_note.setError("Please enter a note");
                 }else{
-                    presenter.saveNote(title,note,color);
+                    presenter.saveNote(title,note,colores);
                 }
             }
         });
@@ -78,30 +91,81 @@ public class EditorActivity extends AppCompatActivity implements EditorView {
 
 
     }
+    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_editor, menu);
+        actionMenu = menu;
+
+        if (id != 0) {
+            actionMenu.findItem(R.id.edit).setVisible(true);
+            actionMenu.findItem(R.id.delete).setVisible(true);
+            actionMenu.findItem(R.id.save).setVisible(false);
+            actionMenu.findItem(R.id.update).setVisible(false);
+        } else {
+            actionMenu.findItem(R.id.edit).setVisible(false);
+            actionMenu.findItem(R.id.delete).setVisible(false);
+            actionMenu.findItem(R.id.save).setVisible(true);
+            actionMenu.findItem(R.id.update).setVisible(false);
+        }
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        String title = txt_title.getText().toString().trim();
+        String note = txt_note.getText().toString().trim();
+        int colores = this.color;
+
         switch (item.getItemId()){
             case R.id.save:
-
-                String title = txt_title.getText().toString().trim();
-                String note = txt_note.getText().toString().trim();
-                int color = this.colores;
-
                 if(title.isEmpty()){
                     txt_title.setError("Please enter a title");
                 }else if(note.isEmpty()){
                     txt_note.setError("Please enter a note");
                 }else{
-                    presenter.saveNote(title,note,color);
+                    presenter.saveNote(title,note,colores);
                 }
+                return true;
+            case R.id.edit:
+
+                editMode();
+                actionMenu.findItem(R.id.edit).setVisible(false);
+                actionMenu.findItem(R.id.delete).setVisible(false);
+                actionMenu.findItem(R.id.save).setVisible(false);
+                actionMenu.findItem(R.id.update).setVisible(true);
+
+                return true;
+
+            case R.id.update:
+                //Update
+
+                if (title.isEmpty()) {
+                    txt_title.setError("Please enter a title");
+                } else if (note.isEmpty()) {
+                    txt_note.setError("Please enter a note");
+                } else {
+                    presenter.updateNote(id, title, note, colores);
+                }
+
+                return true;
+            case R.id.delete:
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setTitle("Confirm !");
+                alertDialog.setMessage("Are you sure?");
+                alertDialog.setNegativeButton("Yes", (dialog, which) -> {
+                    dialog.dismiss();
+                    presenter.deleteNote(id);
+                });
+                alertDialog.setPositiveButton("Cencel",
+                        (dialog, which) -> dialog.dismiss());
+
+                alertDialog.show();
 
                 return true;
             default:
@@ -162,13 +226,47 @@ public class EditorActivity extends AppCompatActivity implements EditorView {
     }
 
     @Override
-    public void onAddSuccess(String message) {
+    public void onRequestSuccess(String message) {
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+        setResult(RESULT_OK);
         finish();
     }
 
     @Override
-    public void onAddError(String message) {
+    public void onRequestError(String message) {
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
     }
+
+    private void setDataFromIntentExtra() {
+
+        if (id != 0) {
+            txt_title.setText(title);
+            txt_note.setText(note);
+            palette.setSelectedColor(color);
+
+            getSupportActionBar().setTitle("Update Note");
+            readMode();
+        } else {
+            palette.setSelectedColor(getResources().getColor(R.color.white));
+            color = getResources().getColor(R.color.white);
+            editMode();
+        }
+
+    }
+
+    private void editMode() {
+        txt_title.setFocusableInTouchMode(true);
+        txt_note.setFocusableInTouchMode(true);
+        palette.setEnabled(true);
+    }
+
+    private void readMode() {
+        txt_title.setFocusableInTouchMode(false);
+        txt_note.setFocusableInTouchMode(false);
+        txt_title.setFocusable(false);
+        txt_note.setFocusable(false);
+        palette.setEnabled(false);
+    }
+
+
 }

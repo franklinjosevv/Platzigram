@@ -34,4 +34,7 @@
     <string name="button1">Start</string>
     <string name="button2">Destroy</string>
     <string name="button3">Alarma</string>
+    <string name="date">15 de Diciembre 2019</string>
+    <string name="enter_note">Enter a note...</string>
+    <string name="to_do">To do</string>
 </resources>

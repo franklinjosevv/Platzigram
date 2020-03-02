@@ -1,7 +1,5 @@
 package franklinvasquez.ufps.platzigram;
 
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 
 import franklinvasquez.ufps.platzigram.model.Note;
@@ -32,12 +30,12 @@ public class EditorPresenter {
                 if(response.isSuccessful() && response.body() != null){
                     Boolean success = response.body().getSuccess();
                     if(success){
-                        view.onAddSuccess(response.body().getMessage());
+                        view.onRequestSuccess(response.body().getMessage());
                         //Toast.makeText(getApplicationContext(),"exito",Toast.LENGTH_LONG).show();
                         //Toast.makeText(getApplicationContext(),response.body().getMessage(),Toast.LENGTH_LONG).show();
                         //finish();
                     }else{
-                        view.onAddError(response.body().getMessage());
+                        view.onRequestError(response.body().getMessage());
                         //Toast.makeText(getApplicationContext(),response.body().getMessage(),Toast.LENGTH_LONG).show();
                     }
                 }
@@ -47,12 +45,69 @@ public class EditorPresenter {
             public void onFailure(@NonNull Call<Note> call,@NonNull Throwable t) {
 
                 view.hideProgress();
-                view.onAddError(t.getLocalizedMessage());
+                view.onRequestError(t.getLocalizedMessage());
                 //Toast.makeText(getApplicationContext(),t.getLocalizedMessage(),Toast.LENGTH_LONG).show();
             }
         });
 
 
+    }
+
+    void updateNote(int id, String title,String note, int color){
+
+        view.showProgress();
+        ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+
+        Call<Note> call = apiInterface.updateNote(id,title,note,color);
+        call.enqueue(new Callback<Note>() {
+            @Override
+            public void onResponse(Call<Note> call, Response<Note> response) {
+                view.hideProgress();
+                if(response.isSuccessful() && response.body() != null){
+
+                    Boolean success = response.body().getSuccess();
+                    if(success){
+                        view.onRequestSuccess(response.body().getMessage());
+                    }else{
+                        view.onRequestError(response.body().getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Note> call, Throwable t) {
+                view.hideProgress();
+                view.onRequestError(t.getLocalizedMessage());
+
+            }
+        });
+    }
+
+    void deleteNote(int id){
+        view.showProgress();
+        ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<Note> call = apiInterface.deleteNote(id);
+        call.enqueue(new Callback<Note>() {
+            @Override
+            public void onResponse(Call<Note> call, Response<Note> response) {
+                view.hideProgress();
+                if(response.isSuccessful() && response.body() != null){
+
+                    Boolean success = response.body().getSuccess();
+                    if(success){
+                        view.onRequestSuccess(response.body().getMessage());
+                    }else{
+                        view.onRequestError(response.body().getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Note> call, Throwable t) {
+                view.hideProgress();
+                view.onRequestError(t.getLocalizedMessage());
+            }
+        });
     }
 
 }
